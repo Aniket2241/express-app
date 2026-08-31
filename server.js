@@ -3,6 +3,7 @@ const cors = require('cors');
 const app= express();
 const db=require('./db');
 const itemRoutes=require('./routes/item.routes');
+const AuthRoutes=require('./routes/auth.routes')
 app.use(express.json());
 app.use(cors());
 
@@ -14,18 +15,7 @@ app.get('/',(req,res)=>{
     })
 });
 app.use('/items',itemRoutes);
-
-app.delete('/del-item',async(req,res)=>{
-    const id=req.body.id;
-    try{
-        const result=await db.query('DELETE FROM items where id=$1 RETURNING*',[id]);
-        return res.status(201).json(result.rows[0]);
-    }
-    catch(err){
-            console.log(err);
-        return res.status(500).json({message:"Database error"});
-    }
-})
+app.use('/auth',AuthRoutes);
 app.listen(5000,()=>{
     console.log("SERVER IS RUNNING AT PORT 5000");
 })
