@@ -22,6 +22,7 @@ const postItems=async(req,res)=>{
             error:"name and price are required "
         });
     }
+    
    const result=await itemService.postItems(name,price);
    res.status(200).json(result);}
     catch(err){
