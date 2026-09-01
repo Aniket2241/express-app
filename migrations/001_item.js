@@ -1,0 +1,19 @@
+exports.up=(pgm)=>{
+    pgm.createTable('items',{
+      id:{
+        type:'serial',
+        primaryKey:true
+      },
+      name:{
+        type:'varchar(255)',
+        notNull: true
+      },
+      price:{
+        type:'varchar(255)',
+        notNull:true,
+      }
+    })
+};
+exports.down=(pgm)=>{
+    pgm.dropTable('items');
+};
