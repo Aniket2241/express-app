@@ -26,6 +26,26 @@ const RegisterUser=async(req,res)=>{
     
 
 };
+const findUser=async(req,res)=>{
+    const phone=req.body.phone;
+    const name=req.body.name;
+    if(!phone || !name){
+        return res.status(400).json({message:"Both values are needed to confirm user"});
+    }
+    try{
+  const result=await AuthService.findUser(phone,name);
+  if(result){
+    
+    return res.status(200).json({message:"user found in db"});
+  }
+  return res.status(404).json({message:"user not found in db"});
+    }
+    catch(error){
+        return res.status(500).json({message:"Database error"});
+    }
+  
+}
 module.exports={
-RegisterUser
+RegisterUser,
+findUser
 }
