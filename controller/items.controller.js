@@ -42,8 +42,17 @@ const postItems=async(req,res)=>{
         const result=await itemService.replaceItems(id,name,price);
         res.status(201).json(result);
     }
+    const deleteItems=async(req,res)=>{
+        const id=req.body.id;
+        if(!id){
+            return res.status(400).json({message:"ID is required"});
+        }
+        const result=await itemService.deleteItems(id);
+        return res.status(200).json(result);
+    }
 module.exports={
     getItems,
     postItems,
+    deleteItems,
     replaceItems
 }

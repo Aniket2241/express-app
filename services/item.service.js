@@ -13,8 +13,13 @@ const replaceItems=async(id,name,price)=>{
     const replace=await db.query('update items set name=$1 ,price=$2 where id=$3 RETURNING *',[name,price,id]);
     return replace.rows[0];
 }
+const deleteItems=async(id)=>{
+    const del=await db.query('delete from items where id=$1 returning *',[id]);
+    return del.rows[0];
+}
 module.exports={
     getItems,
     postItems,
     replaceItems
+    ,deleteItems
 };
