@@ -18,6 +18,7 @@ const RegisterUser=async(req,res)=>{
        return res.status(201).json(result);
     }
     catch(error){
+         console.log("LOGIN ERROR:", error);
          console.log(error);
          res.status(500).json({
             message:"database error"
@@ -33,12 +34,17 @@ const findUser=async(req,res)=>{
         return res.status(400).json({message:"Both values are needed to confirm user"});
     }
     try{
-  const result=await AuthService.findUser(phone,name);
-  if(result){
-    
-    return res.status(200).json({message:"user found in db"});
+  const result=await AuthService.Login(phone,name);
+  if(!result){
+    return res.status(401).json({
+        message:"User not authorised"
+    });
   }
-  return res.status(404).json({message:"user not found in db"});
+  
+    return res.status(200).json({message:"User logged in ",
+        token:result
+    });
+
     }
     catch(error){
         return res.status(500).json({message:"Database error"});
