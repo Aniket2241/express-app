@@ -31,13 +31,13 @@ const RegisterUser=async(req,res)=>{
 
 };
 const findUser=async(req,res)=>{
-    const phone=req.body.phone;
+    const password=req.body.password;
     const name=req.body.name;
-    if(!phone || !name){
+    if(!password || !name){
         return res.status(400).json({message:"Both values are needed to confirm user"});
     }
     try{
-  const result=await AuthService.Login(phone,name);
+  const result=await AuthService.Login(password,name);
   if(!result){
     return res.status(401).json({
         message:"User not authorised"
