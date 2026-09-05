@@ -3,8 +3,9 @@ const AuthService=require('../services/auth.service')
 const RegisterUser=async(req,res)=>{
     const name=req.body.name;
     const phone=req.body.phone;
-    if(!name || !phone){
-        return res.status(400).json({message:"Both fields are required"});
+    const password=req.body.password;
+    if(!name || !phone || !password){
+        return res.status(400).json({message:"All fields are required"});
     } 
     if(typeof phone!=="string"){
         return res.status(400).json({message:"phone must be a string "});
@@ -13,8 +14,9 @@ const RegisterUser=async(req,res)=>{
         return res.status(400).send("Phone must be of length 10");
     }
     
+    
     try{
-        const result= await AuthService.Register(name,phone);
+        const result= await AuthService.Register(name,phone,password);
        return res.status(201).json(result);
     }
     catch(error){
