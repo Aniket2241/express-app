@@ -1,5 +1,6 @@
 
 const AuthService=require('../services/auth.service')
+
 const RegisterUser=async(req,res)=>{
     const name=req.body.name;
     const phone=req.body.phone;

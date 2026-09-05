@@ -1,7 +1,9 @@
 const db=require('../db');
 const jwt=require('jsonwebtoken')
+const bcrypt=require('bcrypt');
 const Register=async(name,phone,password)=>{
-const query =await db.query('INSERT INTO users (name,phone,password)VALUES($1,$2,$3) RETURNING *',[name,phone,password]);
+    const hashedPassword= await bcrypt.hash(password,10);
+const query =await db.query('INSERT INTO users (name,phone,password)VALUES($1,$2,$3) RETURNING *',[name,phone,hashedPassword]);
 return query.rows[0];
 }
 const Login=async(phone,name)=>{
