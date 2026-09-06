@@ -6,7 +6,7 @@ const authMiddleware=(req,res,next)=>{
             message:"Auth token is required"
         })
     }
-    const token =authHeaders.split('')[1];
+    const token =authHeaders.split(' ')[1];
     try{
         const decoded=jwt.verify(
             token,

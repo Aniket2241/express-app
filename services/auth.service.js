@@ -32,7 +32,12 @@ const Login=async(password,name)=>{
     );
   return token;
 }
+const editProfile=async(name,userID)=>{
+const query=await db.query('UPDATE users set name=$1 where id=$2 ',[name,userID]);
+return query.rows[0];
+}
 module.exports={
     Register,
-    Login
+    Login,
+    editProfile
 }

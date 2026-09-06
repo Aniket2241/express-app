@@ -1,5 +1,5 @@
-const { response } = require("express");
 
+const authService=require('../services/auth.service')
 const edit=async(req,res)=>{
 const name=req.body.name;
 if(!name){
@@ -9,8 +9,8 @@ if(!name){
 }
 const userID=req.user.id;
 try{
-    const result=await authservice.editProfile(name,userID);
-    return response.status(200).json(result);
+    const result=await authService.editProfile(name,userID);
+    return res.status(200).json({message:"user updated successfully"});
 }
 catch(error){
     console.log(error);
