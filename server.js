@@ -4,6 +4,7 @@ const app= express();
 const itemRoutes=require('./routes/item.routes');
 const AuthRoutes=require('./routes/auth.routes');
 const editRoutes=require('./routes/edit.routes');
+const userRoutes=require('./routes/user.routes');
 app.use(express.json());
 app.use(cors());
 app.get('/',(req,res)=>{
@@ -15,6 +16,7 @@ app.get('/',(req,res)=>{
 app.use('/items',itemRoutes);
 app.use('/auth',AuthRoutes);
 app.use('/edit',editRoutes);
+app.use('/users',userRoutes);
 app.listen(5000,()=>{
     console.log("SERVER IS RUNNING AT PORT 5000");
 })
